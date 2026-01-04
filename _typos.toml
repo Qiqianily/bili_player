@@ -1,0 +1,4 @@
+[default.extend-words] # 排出的单词
+
+[files]
+extend-exclude = ["CHANGELOG.md", "docs/*"] # 排出检查的文件
