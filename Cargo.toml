@@ -7,6 +7,7 @@ authors = ["Qiqianily <Joedian@163.com>"]
 license = "MIT"
 
 [dependencies]
+thiserror = "2.0"
 anyhow = "1.0"
 serde = {version = "1.0",features = ["derive"]}
 serde_json = "1.0"
@@ -14,3 +15,13 @@ sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite","chrono"] }
 tokio = {version = "1.48.0", features = ["macros", "rt-multi-thread", "net"] }
 tracing = {version = "0.1.41",features = ["async-await"]}
 tracing-subscriber = {version = "0.3.20",features = ["env-filter","chrono"]}
+prost = "0.14"
+prost-types = "0.14"
+tonic = "0.14"
+tonic-prost = "0.14.2"
+gstreamer = "0.24.4"
+reqwest = {version = "0.12.26", features = ["json", "stream"]}
+
+[build-dependencies]
+anyhow = "1.0"
+tonic-prost-build = "0.14"

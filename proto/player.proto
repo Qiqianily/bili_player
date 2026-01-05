@@ -1,0 +1,119 @@
+syntax = "proto3";
+package player;
+
+// 添加音乐到数据库中的请求参数
+message CreateMusicRequest {
+  string bvid = 1;
+  string song_name = 2;
+  string cid = 3;
+  string author = 4;
+}
+
+// 添加音乐到数据库中的响应参数
+message PlayRequest {}
+
+message PlayResponse {
+  bool success = 1;
+  string message = 2;
+}
+message PlayBvidRequest {
+  string bvid = 1;
+}
+
+message PlayBvidResponse {
+  bool success = 1;
+  string message = 2;
+}
+message PauseRequest {}
+
+message PauseResponse {
+  bool success = 1;
+  string message = 2;
+}
+message NextRequest {}
+
+message NextResponse {
+  bool success = 1;
+  string message = 2;
+}
+message PreviousRequest {}
+
+message PreviousResponse {
+  bool success = 1;
+  string message = 2;
+}
+message StopRequest {}
+
+message StopResponse {
+  bool success = 1;
+  string message = 2;
+}
+message SetModelRequest {
+  string model = 1;
+}
+message SetModelResponse {
+  bool success = 1;
+  string message = 2;
+}
+message AddLikedRequest {
+  string bvid = 1;
+  string song_name = 2;
+  string cid = 3;
+  string author = 4;
+}
+
+message AddLikedResponse {
+  bool success = 1;
+  string message = 2;
+}
+message DeletedRequest {
+  string bvid = 1;
+}
+
+message DeletedResponse {
+  bool success = 1;
+  string message = 2;
+}
+message GetStateRequest {}
+
+message GetStateResponse {
+  bool success = 1;
+  string message = 2;
+}
+message ShowPlayListRequest {
+  int32 page = 1;
+}
+
+message ShowPlayListResponse {
+  bool success = 1;
+  int32 total = 2;
+  int32 current = 3;
+  repeated string infos = 4;
+}
+
+message ShowLikedListRequest {
+  int32 page = 1;
+}
+
+message ShowLikedListResponse {
+  bool success = 1;
+  int32 total = 2;
+  int32 current = 3;
+  repeated string infos = 4;
+}
+
+// service
+service PlayerService {
+  rpc Play(PlayRequest) returns (PlayResponse);
+  rpc PlayBvid(PlayBvidRequest) returns (PlayBvidResponse);
+  rpc Pause(PauseRequest) returns (PauseResponse);
+  rpc Next(NextRequest) returns (NextResponse);
+  rpc Previous(PreviousRequest) returns (PreviousResponse);
+  rpc Stop(StopRequest) returns (StopResponse);
+  rpc SetModel(SetModelRequest) returns (SetModelResponse);
+  rpc AddLiked(AddLikedRequest) returns (AddLikedResponse);
+  rpc Deleted(DeletedRequest) returns (DeletedResponse);
+  rpc GetState(GetStateRequest) returns (GetStateResponse);
+  rpc ShowPlayList(ShowPlayListRequest) returns (ShowPlayListResponse);
+  rpc ShowLikedList(ShowLikedListRequest) returns (ShowLikedListResponse);
+}
