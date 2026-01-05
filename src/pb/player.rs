@@ -82,18 +82,14 @@ pub struct SetModelResponse {
     pub message: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AddLikedRequest {
+pub struct AddPlaylistRequest {
     #[prost(string, tag = "1")]
     pub bvid: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
     pub song_name: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub cid: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub author: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AddLikedResponse {
+pub struct AddPlaylistResponse {
     #[prost(bool, tag = "1")]
     pub success: bool,
     #[prost(string, tag = "2")]
@@ -136,21 +132,17 @@ pub struct ShowPlayListResponse {
     #[prost(string, repeated, tag = "4")]
     pub infos: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ShowLikedListRequest {
-    #[prost(int32, tag = "1")]
-    pub page: i32,
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SetVolumeRequest {
+    #[prost(double, tag = "1")]
+    pub volume: f64,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ShowLikedListResponse {
+pub struct SetVolumeResponse {
     #[prost(bool, tag = "1")]
     pub success: bool,
-    #[prost(int32, tag = "2")]
-    pub total: i32,
-    #[prost(int32, tag = "3")]
-    pub current: i32,
-    #[prost(string, repeated, tag = "4")]
-    pub infos: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, tag = "2")]
+    pub message: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
 pub mod player_service_client {
@@ -397,11 +389,11 @@ pub mod player_service_client {
                 .insert(GrpcMethod::new("player.PlayerService", "SetModel"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn add_liked(
+        pub async fn add_playlist(
             &mut self,
-            request: impl tonic::IntoRequest<super::AddLikedRequest>,
+            request: impl tonic::IntoRequest<super::AddPlaylistRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::AddLikedResponse>,
+            tonic::Response<super::AddPlaylistResponse>,
             tonic::Status,
         > {
             self.inner
@@ -414,11 +406,11 @@ pub mod player_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/player.PlayerService/AddLiked",
+                "/player.PlayerService/AddPlaylist",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("player.PlayerService", "AddLiked"));
+                .insert(GrpcMethod::new("player.PlayerService", "AddPlaylist"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn deleted(
@@ -493,11 +485,11 @@ pub mod player_service_client {
                 .insert(GrpcMethod::new("player.PlayerService", "ShowPlayList"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn show_liked_list(
+        pub async fn set_volume(
             &mut self,
-            request: impl tonic::IntoRequest<super::ShowLikedListRequest>,
+            request: impl tonic::IntoRequest<super::SetVolumeRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ShowLikedListResponse>,
+            tonic::Response<super::SetVolumeResponse>,
             tonic::Status,
         > {
             self.inner
@@ -510,11 +502,11 @@ pub mod player_service_client {
                 })?;
             let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/player.PlayerService/ShowLikedList",
+                "/player.PlayerService/SetVolume",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("player.PlayerService", "ShowLikedList"));
+                .insert(GrpcMethod::new("player.PlayerService", "SetVolume"));
             self.inner.unary(req, path, codec).await
         }
     }
@@ -569,11 +561,11 @@ pub mod player_service_server {
             tonic::Response<super::SetModelResponse>,
             tonic::Status,
         >;
-        async fn add_liked(
+        async fn add_playlist(
             &self,
-            request: tonic::Request<super::AddLikedRequest>,
+            request: tonic::Request<super::AddPlaylistRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::AddLikedResponse>,
+            tonic::Response<super::AddPlaylistResponse>,
             tonic::Status,
         >;
         async fn deleted(
@@ -594,11 +586,11 @@ pub mod player_service_server {
             tonic::Response<super::ShowPlayListResponse>,
             tonic::Status,
         >;
-        async fn show_liked_list(
+        async fn set_volume(
             &self,
-            request: tonic::Request<super::ShowLikedListRequest>,
+            request: tonic::Request<super::SetVolumeRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ShowLikedListResponse>,
+            tonic::Response<super::SetVolumeResponse>,
             tonic::Status,
         >;
     }
@@ -990,25 +982,25 @@ pub mod player_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/player.PlayerService/AddLiked" => {
+                "/player.PlayerService/AddPlaylist" => {
                     #[allow(non_camel_case_types)]
-                    struct AddLikedSvc<T: PlayerService>(pub Arc<T>);
+                    struct AddPlaylistSvc<T: PlayerService>(pub Arc<T>);
                     impl<
                         T: PlayerService,
-                    > tonic::server::UnaryService<super::AddLikedRequest>
-                    for AddLikedSvc<T> {
-                        type Response = super::AddLikedResponse;
+                    > tonic::server::UnaryService<super::AddPlaylistRequest>
+                    for AddPlaylistSvc<T> {
+                        type Response = super::AddPlaylistResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::AddLikedRequest>,
+                            request: tonic::Request<super::AddPlaylistRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PlayerService>::add_liked(&inner, request).await
+                                <T as PlayerService>::add_playlist(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1019,7 +1011,7 @@ pub mod player_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = AddLikedSvc(inner);
+                        let method = AddPlaylistSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1170,25 +1162,25 @@ pub mod player_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/player.PlayerService/ShowLikedList" => {
+                "/player.PlayerService/SetVolume" => {
                     #[allow(non_camel_case_types)]
-                    struct ShowLikedListSvc<T: PlayerService>(pub Arc<T>);
+                    struct SetVolumeSvc<T: PlayerService>(pub Arc<T>);
                     impl<
                         T: PlayerService,
-                    > tonic::server::UnaryService<super::ShowLikedListRequest>
-                    for ShowLikedListSvc<T> {
-                        type Response = super::ShowLikedListResponse;
+                    > tonic::server::UnaryService<super::SetVolumeRequest>
+                    for SetVolumeSvc<T> {
+                        type Response = super::SetVolumeResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ShowLikedListRequest>,
+                            request: tonic::Request<super::SetVolumeRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PlayerService>::show_liked_list(&inner, request).await
+                                <T as PlayerService>::set_volume(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1199,7 +1191,7 @@ pub mod player_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ShowLikedListSvc(inner);
+                        let method = SetVolumeSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

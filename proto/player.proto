@@ -55,14 +55,12 @@ message SetModelResponse {
   bool success = 1;
   string message = 2;
 }
-message AddLikedRequest {
+message AddPlaylistRequest {
   string bvid = 1;
   string song_name = 2;
-  string cid = 3;
-  string author = 4;
 }
 
-message AddLikedResponse {
+message AddPlaylistResponse {
   bool success = 1;
   string message = 2;
 }
@@ -90,16 +88,13 @@ message ShowPlayListResponse {
   int32 current = 3;
   repeated string infos = 4;
 }
-
-message ShowLikedListRequest {
-  int32 page = 1;
+message SetVolumeRequest {
+  double volume = 1;
 }
 
-message ShowLikedListResponse {
+message SetVolumeResponse {
   bool success = 1;
-  int32 total = 2;
-  int32 current = 3;
-  repeated string infos = 4;
+  string message = 2;
 }
 
 // service
@@ -111,9 +106,9 @@ service PlayerService {
   rpc Previous(PreviousRequest) returns (PreviousResponse);
   rpc Stop(StopRequest) returns (StopResponse);
   rpc SetModel(SetModelRequest) returns (SetModelResponse);
-  rpc AddLiked(AddLikedRequest) returns (AddLikedResponse);
+  rpc AddPlaylist(AddPlaylistRequest) returns (AddPlaylistResponse);
   rpc Deleted(DeletedRequest) returns (DeletedResponse);
   rpc GetState(GetStateRequest) returns (GetStateResponse);
   rpc ShowPlayList(ShowPlayListRequest) returns (ShowPlayListResponse);
-  rpc ShowLikedList(ShowLikedListRequest) returns (ShowLikedListResponse);
+  rpc SetVolume(SetVolumeRequest) returns (SetVolumeResponse);
 }
