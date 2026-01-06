@@ -17,6 +17,7 @@ pub enum PlayerCommand {
     Delete(DeletedRequest),
     GetState(tokio::sync::oneshot::Sender<PlayerStateSnapshot>),
     ShowPlaylist(),
+    Seek(u64),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]

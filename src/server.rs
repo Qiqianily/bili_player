@@ -168,6 +168,7 @@ async fn main() -> anyhow::Result<()> {
     // 创建播放服务
     let audio_player = AudioPlayer::new(
         play_mode,
+        100,
         initial_track_index,
         Arc::new(Mutex::new(player_command_recv)),
     )

@@ -10,6 +10,9 @@ pub enum ApplicationError {
     #[error("Network error: {0}")]
     NetworkError(String),
 
+    #[error("Set Volume error: {0}")]
+    VolumeError(String),
+
     #[error("I/O error: {0}")]
     IoError(String),
 
